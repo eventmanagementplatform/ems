@@ -7,8 +7,8 @@ const organizerSchema = new mongoose.Schema({
     required: true
   },
   companyName: { type: String, required: true },
-  isCompanyRegistered: { type: Boolean, required: true },
-  companyRegistrationNumber: { type: String, unique: true, sparse: true, default: '' },
+  //isCompanyRegistered: { type: Boolean, required: true },
+  //companyRegistrationNumber: { type: String, unique: true, sparse: true, default: '' },
   logo: { type: String },
   netWorth: { type: String, required: true },
   description: { type: String, required: true },

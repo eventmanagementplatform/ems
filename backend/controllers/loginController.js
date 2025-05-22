@@ -13,13 +13,12 @@ exports.loginUser = async (req, res) => {
     if (!user) return res.status(401).json({ message: 'Invalid email or password' });
 
     // Compare password
-    //const isMatch = await User.findOne({password});
     const isMatch = await bcrypt.compare(password,user.password);
     if (!isMatch) return res.status(401).json({ message: 'Invalid email or password' });
 
     // Generate JWT Token
     const token = jwt.sign(
-      { id: user._id, email: user.email },
+      { id: user._id, email: user.email, emsregistrationId: user.emsregistrationId },
       process.env.JWT_SECRET,
       //'testsecret123',
       { expiresIn: '1h' }

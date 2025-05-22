@@ -18,8 +18,8 @@ exports.createOrganizer = async (req, res) => {
   try {
     const {
       companyName,
-      isCompanyRegistered,
-      companyRegistrationNumber,
+      //isCompanyRegistered,
+      //companyRegistrationNumber,
       netWorth,
       description,
       email,
@@ -36,12 +36,12 @@ exports.createOrganizer = async (req, res) => {
     }
 
     // If registered, check companyRegistrationNumber uniqueness
-    if (isCompanyRegistered && companyRegistrationNumber) {
+    /*if (isCompanyRegistered && companyRegistrationNumber) {
       const regNumExists = await Organizer.findOne({ companyRegistrationNumber });
       if (regNumExists) {
         return res.status(409).json({ message: 'Registration number already exists' });
       }
-    }
+    }*/
 
     const logo = req.file ? req.file.path : null;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -49,8 +49,8 @@ exports.createOrganizer = async (req, res) => {
     const organizer = new Organizer({
       emsregistrationId,
       companyName,
-      isCompanyRegistered,
-      companyRegistrationNumber: isCompanyRegistered ? companyRegistrationNumber : '',
+      //isCompanyRegistered,
+      //companyRegistrationNumber: isCompanyRegistered ? companyRegistrationNumber : '',
       logo,
       netWorth,
       description,
@@ -61,9 +61,9 @@ exports.createOrganizer = async (req, res) => {
       noOfEmployees,
       //...(isCompanyRegistered && companyRegistrationNumber ? { companyRegistrationNumber } : {})
     });
-    if (isCompanyRegistered && companyRegistrationNumber) {
+    /*if (isCompanyRegistered && companyRegistrationNumber) {
     organizer.companyRegistrationNumber = companyRegistrationNumber;
-    }
+    }*/
 
     await organizer.save();
     res.status(201).json({ message: 'Organizer onboarded successfully', organizer });
@@ -95,8 +95,8 @@ exports.updateOrganizer = async (req, res) => {
   try {
     const {
       companyName,
-      isCompanyRegistered,
-      companyRegistrationNumber,
+      //isCompanyRegistered,
+      //companyRegistrationNumber,
       netWorth,
       description,
       email,
